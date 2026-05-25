@@ -98,7 +98,7 @@ type Issuance = {
    type: string;
    category: string;
    date: string;
-   year?: string;
+   year?: string | null;
    fileUrl: string | null;
 };
 

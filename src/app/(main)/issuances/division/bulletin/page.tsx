@@ -50,8 +50,7 @@ export default async function DivisionBulletin() {
                  Official directories, election results, registered school listings, and formal division-wide publications.
               </p>
            </div>
-            </div>
-         </div>
+        </div>
       </section>
 
       <PublicArchiveClient 

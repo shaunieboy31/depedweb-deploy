@@ -3,8 +3,9 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { SEARCH_INDEX } from "@/utils/searchIndex";
+import { Suspense } from "react";
 
-export default function SearchPage() {
+function SearchResultsContent() {
   const searchParams = useSearchParams();
   const q = (searchParams?.get("q") || "").trim();
 
@@ -50,5 +51,13 @@ export default function SearchPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div className="max-w-6xl mx-auto p-8 text-slate-500 font-medium">Loading search results...</div>}>
+      <SearchResultsContent />
+    </Suspense>
   );
 }
