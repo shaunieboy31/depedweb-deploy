@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import React from "react";
 import { ContactService } from "@/services/contact.service";
 
+export const dynamic = "force-dynamic";
+
 export default async function MainLayout({
   children,
 }: {
