@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model News {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(255)
+  date      String   @db.VarChar(100)
+  category  String   @db.VarChar(100)
+  excerpt   String   @db.Text
+  image     String?  @db.VarChar(1024)
+  content   String?  @db.LongText
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("news")
+}
+
+model EmployeeHonor {
+  id        Int      @id @default(autoincrement())
+  image     String?  @db.VarChar(1024)
+  month     String   @db.VarChar(50)
+  year      String   @db.VarChar(20)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("employee_honors")
+}
+
+model CarouselSlide {
+  id        Int      @id @default(autoincrement())
+  image     String   @db.VarChar(1024)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("carousel_slides")
+}
+
+model OrgChart {
+  id         Int      @id @default(autoincrement())
+  department String   @db.VarChar(255)
+  image      String?  @db.VarChar(1024)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("org_charts")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique @db.VarChar(100)
+  password  String   @db.VarChar(255)
+  role      String   @default("ADMIN") @db.VarChar(50)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Issuance {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(512)
+  number    String   @db.VarChar(255)
+  type      String   @db.VarChar(100) // Memoranda, Advisory, Bulletin
+  category  String   @db.VarChar(100) // Division, Regional, National
+  date      String   @db.VarChar(100)
+  year      String?  @db.VarChar(10)  // Series Year (e.g. 2024)
+  fileUrl   String?  @db.VarChar(1024)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("issuances")
+}
+
+model Leader {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  position  String   @db.VarChar(255)
+  image     String?  @db.VarChar(1024)
+  startYear String?  @db.VarChar(50)
+  endYear   String?  @db.VarChar(50)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("leaders")
+}
+
+model School {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  logo      String?  @db.VarChar(1024)
+  banner    String?  @db.VarChar(1024)
+  location  String   @db.VarChar(512)
+  category  String   @db.VarChar(100) // ELEMENTARY, JHS, SHS, INTEGRATED
+  cluster   String?  @db.VarChar(100)
+  contact   String?  @db.VarChar(100)
+  type      String   @db.VarChar(50)  // PUBLIC or PRIVATE
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("schools")
+}
+
+model ContactInfo {
+  id           Int      @id @default(autoincrement())
+  location     String   @db.VarChar(512)
+  phone        String   @db.VarChar(255)
+  email        String   @db.VarChar(255)
+  officeHours  String   @db.VarChar(255)
+  facebook     String?  @db.VarChar(255)
+  twitter      String?  @db.VarChar(255)
+  youtube      String?  @db.VarChar(255)
+  website      String?  @db.VarChar(255)
+  updatedAt    DateTime @updatedAt
+
+  @@map("contact_info")
+}
+
+model TransparencySeal {
+  id          Int      @id @default(autoincrement())
+  category    String   @db.VarChar(100) // e.g. "1.A", "2.A.1", "5.A"
+  title       String   @db.VarChar(512)
+  url         String   @db.VarChar(1024)
+  isExternal  Boolean  @default(false)
+  year        String?  @db.VarChar(10)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("transparency_seal")
+}
